@@ -1,0 +1,31 @@
+{
+  "name": "iyzipay-js",
+  "version": "1.0.0",
+  "description": "New iyzico js sdk",
+  "main": "index.js",
+  "scripts": {
+    "easy": "bun test/easy.ts",
+    "dev": "bun test/test.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iyzico",
+    "sdk",
+    "iyzipay"
+  ],
+  "author": {
+    "name": "@codingwithmanny",
+    "url": "https://github.com/codingwithmanny"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "iyzipay": "^2.0.61",
+    "zod": "^3.23.4"
+  }
+}
