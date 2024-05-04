@@ -1,13 +1,13 @@
 // Imports
 // =================================
 import { DefaultRequest } from "@/types/requests";
-import createClient from "@/client";
+import { baseClient } from "@/client";
 import { generateHeaders } from "./utils";
 
 // Main Script
 // =================================
 export default async function (
-  client: ReturnType<typeof createClient>,
+  client: ReturnType<typeof baseClient>,
   {
     endpoint = "",
     method = "GET",

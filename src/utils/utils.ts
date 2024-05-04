@@ -31,7 +31,6 @@ export const formatPrice = (price: string | number) => {
  */
 export const generateRequestString = (request: { [key: string]: any }) => {
   const isArray = Array.isArray(request);
-  console.log({ isArray, obj: request });
   let requestString = '[';
   for (let i in request) {
       const val = request[i];

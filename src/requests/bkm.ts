@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import type { ApmCreateType, ApmRetrieveType } from "@/types/models";
+import type { BkmCreateBasicType, BkmCreateType, BkmRetreieveType } from "@/types/models";
 import baseRequest from "@/utils/baseRequest";
 import { formatPrice } from "@/utils/utils";
 import { baseClient } from "@/client";
@@ -14,13 +14,14 @@ import { baseClient } from "@/client";
 export default function (client: ReturnType<typeof baseClient>) {
   return {
     /**
-     * @dev EN: Create a new checkout form
-     * @dev TR: Yeni bir ödeme formu oluştur
+     * @dev EN:
+     * @dev TR:
      * @param payload
      */
-    create: (payload?: ApmCreateType) =>
+    create: (
+      payload?: BkmCreateType) =>
       baseRequest(client, {
-        endpoint: "/payment/apm/initialize",
+        endpoint: "/payment/bkm/initialize",
         method: "POST",
         body: {
           locale: payload?.["locale"],
@@ -28,21 +29,8 @@ export default function (client: ReturnType<typeof baseClient>) {
           price: payload?.["price"]
             ? formatPrice(payload?.["price"])
             : undefined,
-          paidPrice: payload?.["paidPrice"]
-            ? formatPrice(payload?.["paidPrice"])
-            : undefined,
-          paymentChannel: payload?.["paymentChannel"],
-          paymentGroup: payload?.["paymentGroup"],
-          paymentSource: payload?.["paymentSource"],
-          currency: payload?.["currency"],
-          merchantOrderId: payload?.["merchantOrderId"],
-          countryCode: payload?.["countryCode"],
-          accountHolderName: payload?.["accountHolderName"],
-          merchantCallbackUrl: payload?.["merchantCallbackUrl"],
-          merchantErrorUrl: payload?.["merchantErrorUrl"],
-          merchantNotificationUrl: payload?.["merchantNotificationUrl"],
-          apmType: payload?.["apmType"],
           basketId: payload?.["basketId"],
+          paymentGroup: payload?.["paymentGroup"],
           buyer: payload?.["buyer"]
             ? {
                 id: payload["buyer"]?.["id"],
@@ -80,26 +68,57 @@ export default function (client: ReturnType<typeof baseClient>) {
             : undefined,
           basketItems: payload?.["basketItems"]?.map((basketItem) => ({
             id: basketItem?.["id"],
-            price: basketItem?.["price"]
-              ? formatPrice(basketItem["price"])
-              : undefined,
             name: basketItem?.["name"],
             category1: basketItem?.["category1"],
             category2: basketItem?.["category2"],
             itemType: basketItem?.["itemType"],
-            subMerchantKey: basketItem?.["subMerchantKey"],
-            subMerchantPrice: basketItem?.["subMerchantPrice"]
-              ? formatPrice(basketItem["subMerchantPrice"])
-              : undefined,
+            price: basketItem?.["price"] ? formatPrice(basketItem["price"]) : undefined,
+            quantity: basketItem?.["quantity"],
+          })),
+          callbackUrl: payload?.["callbackUrl"],
+          paymentSource: payload?.["paymentSource"],
+          enabledInstallments: payload?.["enabledInstallments"],
+        },
+      }),
+    /**
+     * @dev EN:
+     * @dev TR:
+     * @param payload
+     */
+    createBasic: (
+      payload?: BkmCreateBasicType) =>
+      baseRequest(client, {
+        endpoint: "/payment/bkm/initialize/basic",
+        method: "POST",
+        body: {
+          locale: payload?.["locale"],
+          conversationId: payload?.["conversationId"],
+          connectorName: payload?.["connectorName"],
+          price: payload?.["price"]
+            ? formatPrice(payload?.["price"])
+            : undefined,
+          callbackUrl: payload?.["callbackUrl"],
+          buyerEmail: payload?.["buyerEmail"],
+          buyerId: payload?.["buyerId"],
+          buyerIp: payload?.["buyerIp"],
+          posOrderId: payload?.["posOrderId"],
+          installmentDetails: payload?.["installmentDetails"]?.map((
+            bkmInstallmentDetail
+          ) => ({
+            bankId: bkmInstallmentDetail?.["bankId"],
+            installmentPrices: bkmInstallmentDetail?.["installmentPrices"]?.map((bkmInstallmentPrice) => ({
+              installmentNumber: bkmInstallmentPrice?.["installmentNumber"],
+              totalPrice: bkmInstallmentPrice?.["totalPrice"] ? formatPrice(bkmInstallmentPrice["totalPrice"]) : undefined
+            }))
           })),
         },
       }),
     /**
-     * @dev EN: Retrieve a checkout form
-     * @dev TR: Bir ödeme formunu getir
+     * @dev EN:
+     * @dev TR:
      * @param payload
      */
-    retrieve: (payload?: ApmRetrieveType) =>
+    retrieve: (payload?: BkmRetreieveType) =>
       baseRequest(client, {
         endpoint: "/payment/apm/retrieve",
         method: "POST",

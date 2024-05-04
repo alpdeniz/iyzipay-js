@@ -41,12 +41,14 @@ IYZICO_SECRET_KEY="<YOUR_IYZICO_SECRET_KEY>"
 IYZICO_BASE_URL="https://sandbox-api.iyzipay.com" # Optional
 ```
 
-### 3 - Run Test
+### 3 - Run Tests
+
+#### Example Test
 
 ```bash
 # FROM: ./
 
-pnpm dev;
+pnpm test:example;
 
 # [Expected Output]:
 # ...
@@ -65,3 +67,21 @@ pnpm dev;
 # Script complete!
 ```
 
+#### Tests
+
+```bash
+# FROM: ./
+
+pnpm test;
+```
+
+## Building
+
+```bash
+# FROM: ./
+
+pnpm build;
+
+# [Expected Output]:
+# ...
+```

@@ -3,6 +3,8 @@ export const apiUrl = {
   PRODUCTION: "https://api.iyzipay.com"
 } as const;
 
+export const installments = [1, 2, 3, 6, 9, 12] as const;
+
 export const apmType = {
   SOFORT: 'SOFORT',
   IDEAL: 'IDEAL',
@@ -93,4 +95,12 @@ export const subscriptionStatus = {
 
 export const subscriptionUpgradePeriod = {
   NOW: 'NOW'
+} as const;
+
+export const paymentSource = {
+  SHOPIFY: 'SHOPIFY',
+  WOOCOMMERCE: 'WOOCOMMERCE',
+  MAGENTO: 'MAGENTO',
+  OPENCART: 'OPENCART',
+  PRESTASHOP: 'PRESTASHOP',
 } as const;

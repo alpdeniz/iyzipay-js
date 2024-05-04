@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import { checkoutForm, apiTest } from "@/requests";
+import { apiTest, apm, payment } from "@/requests";
 import type { Extended, IyzicoConfig } from "@/types/config";
 import * as constants from "@/utils/constants";
 
@@ -11,7 +11,7 @@ import * as constants from "@/utils/constants";
  * @param config 
  * @returns 
  */
-const baseClient = (config: IyzicoConfig) => {
+export const baseClient = (config: IyzicoConfig) => {
   // Check if sandbox
   const isSandbox = config.apiKey.includes('sandbox') || config.secretKey.includes('sandbox');
 
@@ -50,13 +50,18 @@ const baseClient = (config: IyzicoConfig) => {
  * @param config 
  * @returns 
  */
-export default function createClient (config: IyzicoConfig) {
+export default function createClient (config: IyzicoConfig): ReturnType<typeof baseClient> & {
+  apiTest: ReturnType<typeof apiTest>;
+  apm: ReturnType<typeof apm>;
+  payment: ReturnType<typeof payment>;
+} {
   // return baseClient(config);
   const base = baseClient(config);
   return {
     ...base,
-    checkoutForm: checkoutForm(base),
-    apiTest: apiTest(base)
+    apiTest: apiTest(base),
+    apm: apm(base),
+    payment: payment(base)
   };
   // return baseClient(config).extend({ }) as any;
 }

@@ -1,31 +1,56 @@
 {
   "name": "iyzipay-js",
-  "version": "1.0.0",
-  "description": "New iyzico js sdk",
-  "main": "src/index.js",
-  "scripts": {
-    "easy": "bun test/easy.ts",
-    "dev": "bun test/test.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "iyzico",
-    "sdk",
-    "iyzipay"
-  ],
+  "version": "0.0.1",
+  "description": "A Typesafe Iyzico JS SDK",
+  "main": "./src/_cjs/index.js",
+  "module": "./src/_esm/index.js",
+  "types": "./src/_types/index.js",
   "author": {
     "name": "@codingwithmanny",
     "url": "https://github.com/codingwithmanny"
   },
   "license": "MIT",
+  "export": {
+    ".": {
+      "types": "./src/_types/index.d.ts",
+      "import": "./src/_esm/index.js",
+      "default": "./src/_cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build": "bun build:cjs && bun build:esm && bun build:types",
+    "build:cjs": "rimraf src/_esm; ./node_modules/.bin/tsc --module commonjs --outDir ./src/_cjs --removeComments --verbatimModuleSyntax false && printf '{\"type\":\"commonjs\"}' > ./src/_cjs/package.json",
+    "build:esm": "rimraf src/_esm; ./node_modules/.bin/tsc --module es2015 --outDir ./src/_esm && printf '{\"type\": \"module\",\"sideEffects\":false}' > ./src/_esm/package.json",
+    "build:types": "rimraf src/_types; ./node_modules/.bin/tsc --module esnext --declarationDir ./src/_types --emitDeclarationOnly --declaration --declarationMap",
+    "clean": "rimraf src/_dist",
+    "dev": "ts-node test/test.ts",
+    "test": "./node_modules/.bin/vitest run src",
+    "test:coverage": "./node_modules/.bin/vitest run --coverage src",
+    "test:example": "ts-node test/example.ts"
+  },
+  "keywords": [
+    "typescript",
+    "types",
+    "typesafe",
+    "iyzico",
+    "sdk",
+    "iyzipay"
+  ],
   "devDependencies": {
+    "@jest/types": "^29.6.3",
+    "@tsconfig/node16": "^16.1.3",
+    "@vitest/coverage-v8": "^1.6.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "iyzipay": "^2.0.61",
-    "zod": "^3.23.4"
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
