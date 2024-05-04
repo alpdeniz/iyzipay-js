@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import type { BkmCreateBasicType, BkmCreateType, BkmRetreieveType } from "@/types/models";
+import type { BkmCreateBasicType, BkmCreateType } from "@/types/models";
 import baseRequest from "@/utils/baseRequest";
 import { formatPrice } from "@/utils/utils";
 import { baseClient } from "@/client";

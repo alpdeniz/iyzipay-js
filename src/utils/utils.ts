@@ -67,6 +67,7 @@ const generateAuthorizationString = (
   payloadObject: { [key: string]: any }
 ) => {
   const requestString = generateRequestString(payloadObject);
+  console.log({ requestString });
   const hashSha1 = crypto.createHash('sha1');
   hashSha1.update(apiKey + randomString + secretKey + requestString, 'utf-8'); 
   return hashSha1.digest('base64');

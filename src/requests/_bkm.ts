@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import type { BkmCreateBasicType, BkmCreateType, BkmRetreieveType } from "@/types/models";
+import type { BkmCreateBasicType, BkmCreateType, BkmRetrieveType } from "@/types/models";
 import baseRequest from "@/utils/baseRequest";
 import { formatPrice } from "@/utils/utils";
 import { baseClient } from "@/client";
@@ -118,14 +118,14 @@ export default function (client: ReturnType<typeof baseClient>) {
      * @dev TR:
      * @param payload
      */
-    retrieve: (payload?: BkmRetreieveType) =>
+    retrieve: (payload: BkmRetrieveType) =>
       baseRequest(client, {
         endpoint: "/payment/apm/retrieve",
         method: "POST",
         body: {
           locale: payload?.locale,
           conversationId: payload?.conversationId,
-          paymentId: payload?.paymentId,
+          token: payload.token,
         },
       }),
   };

@@ -33,6 +33,9 @@ export const CARDS = {
     {
       cardNumber: "5400010000000004", bank: "Non-Turkish", provider: "Master Card", type: "Credit",
     },
+    {
+      cardNumber: "6221060000000004", bank: "Iran", provider: "Unknown", type: "Unknown",
+    },
   ],
   error: {
     SUCCESS_CANNOT_CANCEL_REFUND_POSTAUTH: {

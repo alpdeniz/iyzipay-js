@@ -1,5 +1,7 @@
 // Imports
 // =================================
+import { baseClient } from "@/client";
+import { apiTest, apm, payment, submerchant } from "@/requests";
 import * as constants from "@/utils/constants";
 
 // Types
@@ -14,7 +16,7 @@ export type Prettify<T> = {
   [K in keyof T]: T[K]
 } & {};
 
-export type Client_Base = typeof constants & {
+export type ClientBase = typeof constants & {
   apiKey: string;
   secretKey: string;
   isSandbox: boolean;
@@ -22,7 +24,14 @@ export type Client_Base = typeof constants & {
 
 export type Extended = Prettify<
   // disallow redefining base properties
-  { [_ in keyof Client_Base]?: undefined } & {
+  { [_ in keyof ClientBase]?: undefined } & {
     [key: string]: unknown
   }
->
+>;
+
+export type IyzicoClient = ReturnType<typeof baseClient> & {
+  apiTest: ReturnType<typeof apiTest>;
+  apm: ReturnType<typeof apm>;
+  payment: ReturnType<typeof payment>;
+  submerchant: ReturnType<typeof submerchant>;
+};

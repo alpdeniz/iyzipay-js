@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import { currency, paymentChannel, installments, locale, paymentGroup, paymentSource, baseItemType } from "@/utils/constants";
+import { currency, paymentChannel, installments, locale, paymentGroup, paymentSource, baseItemType, subMerchantType } from "@/utils/constants";
 
 // Types
 // =================================
@@ -13,7 +13,7 @@ export type BasicRequestType = {
 
 export type BasicBasketType = {
   basketId?: string;
-  basketItems?: BasketItemType[];
+  basketItems: BasketItemType[];
 };
 
 export type BasicAddresesType = {
@@ -175,6 +175,114 @@ export type CheckoutFormRetrieveType = {
   token: string;
 };
 
+export type BinCheckType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  binNumber: `${number}${number}${number}${number}${number}${number}`;
+};
+
+export type SubmerchantCreateType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  name?: string;
+  email?: string;
+  gsmNumber?: string;
+  address?: string;
+  iban?: string;
+  taxOffice?: string;
+  contactName?: string;
+  contactSurname?: string;
+  legalCompanyTitle?: string;
+  swiftCode?: string;
+  currency?: (typeof currency)[keyof typeof currency];
+  subMerchantExternalId?: string;
+  identityNumber?: string;
+  taxNumber?: string;
+  subMerchantType?: (typeof subMerchantType)[keyof typeof subMerchantType];
+};
+
+export type SubmerchantRetrieveType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  subMerchantExternalId: string;
+};
+
+export type SubmerchantUpdateType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  name?: string;
+  email?: string;
+  gsmNumber?: string;
+  address?: string;
+  iban?: string;
+  contactName?: string;
+  contactSurname?: string;
+  currency?: (typeof currency)[keyof typeof currency];
+  subMerchantKey: string;
+  identityNumber?: string;
+  taxOffice?: string;
+  legalCompanyTitle?: string;
+  swiftCode?: string;
+  taxNumber?: string;
+};
+
+export type CardStorageCreateType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  externalId: string;
+  email?: string;
+  cardUserKey?: string;
+  card: {
+    cardAlias: string;
+    cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number | ""}`;
+    expireYear: `${number}${number}${number}${number}`;
+    expireMonth: `${number}${number}`;
+    cardHolderName: string;
+  };
+};
+
+export type CardStorageRetrieveType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  cardUserKey: string;
+};
+
+export type CardStorageDeleteType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  cardUserKey: string;
+  cardToken: string;
+};
+
+export type Payment3DSecureCreateType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  price: string | number;
+  paidPrice: string | number;
+  installment?: typeof installments[number];
+  paymentChannel?: (typeof paymentChannel)[keyof typeof paymentChannel];
+  basketId?: string;
+  paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
+  paymentCard: PaymentCardType,
+  buyer: BuyerType;
+  shippingAddress: AddressType;
+  billingAddress: AddressType;
+  basketItems: BasketItemType[];
+  currency?: (typeof currency)[keyof typeof currency];
+  callbackUrl?: string;
+  paymentSource?: (typeof paymentSource)[keyof typeof paymentSource];
+  gsmNumber?: string;
+  posOrderId?: string;
+  connectorName?: string;
+}
+
+export type Payment3DSecureRetrieveType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  paymentId: string;
+  paymentConversationId?: string;
+}
+
 // TBD
 
 export type ApmCreateType = Omit<BasicRequestType, "connectorName"> &
@@ -225,8 +333,8 @@ export type BkmCreateBasicType = Omit<BkmCreateType, "basic" | "paymentSource" |
   posOrderId?: string;
 };
 
-export type BkmRetreieveType = Omit<BasicRequestType, "connectorName"> & {
-  paymentId?: string;
+export type BkmRetrieveType = Omit<BasicRequestType, "connectorName"> & {
+  token: string;
 }
 
 

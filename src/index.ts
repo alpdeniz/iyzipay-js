@@ -1,11 +1,11 @@
 // Imports
 // =================================
 import createClient from "@/client";
-import { IyzicoConfig } from "@/types/config";
+import { IyzicoClient, IyzicoConfig } from "@/types/config";
 
 // Main Script
 // =================================
-const iyzico = (config: IyzicoConfig) => {
+const iyzico = (config: IyzicoConfig): IyzicoClient => {
   return createClient(config);
 };
 

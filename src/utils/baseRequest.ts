@@ -24,7 +24,7 @@ export default async function (
         ...generateHeaders(client.apiKey, client.secretKey, body),
         ...headers,
       }, 
-      body: !['DELETE', 'GET'].includes(method) 
+      body: !['GET'].includes(method) 
         ? JSON.stringify(body) 
         : undefined,
       signal,

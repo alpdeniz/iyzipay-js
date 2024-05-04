@@ -104,3 +104,9 @@ export const paymentSource = {
   OPENCART: 'OPENCART',
   PRESTASHOP: 'PRESTASHOP',
 } as const;
+
+export const subMerchantType = {
+  PERSONAL: 'PERSONAL',
+  PRIVATE_COMPANY: 'PRIVATE_COMPANY',
+  LIMITED_OR_JOINT_STOCK_COMPANY: 'LIMITED_OR_JOINT_STOCK_COMPANY'
+} as const;

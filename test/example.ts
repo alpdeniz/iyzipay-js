@@ -39,6 +39,12 @@ const main = async () => {
     secretKey: `${process.env.IYZICO_SECRET_KEY}`,
   });
 
+  // client.
+
+// ^ client.apiTest.retrieve
+
+  // client.payment.asd
+
   const responseCheckoutFormCreate = await client.payment.checkoutForm.create({
     "locale": "tr",
     "conversationId": "123456789",
