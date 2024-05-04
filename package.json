@@ -1,5 +1,5 @@
 {
-  "name": "iyzipay-js",
+  "name": "@codingwithmanny/iyzipay-js",
   "version": "0.0.1-alpha",
   "description": "A Typesafe Iyzico JS SDK",
   "main": "./src/_cjs/index.js",
