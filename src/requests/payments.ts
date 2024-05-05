@@ -1,7 +1,6 @@
 // Imports
 // =================================
 import type {
-  PaymentCreateType,
   BkmCreateType,
   PaymentRetrieveType,
   PaymentCreateAltType,
@@ -13,23 +12,11 @@ import type {
   BkmRetrieveType,
   Payment3DSecureCreateType,
   Payment3DSecureRetrieveType,
-} from "@/types/models";
-import baseRequest from "@/utils/baseRequest";
-import { formatPrice } from "@/utils/utils";
-import { baseClient } from "@/client";
-import { create } from "domain";
-import iyzico from "..";
-import {
-  paymentChannel,
-  installments,
-  paymentSource,
-  currency,
-  baseItemType,
-  locale,
-  paymentGroup,
-} from "@/utils/constants";
-import { b } from "vitest/dist/suite-IbNSsUWN";
-import { payment } from ".";
+} from "../types/models";
+import baseRequest from "../utils/baseRequest";
+import { formatPrice } from "../utils/utils";
+import { baseClient } from "../client";
+import { currency, locale } from "../utils/constants";
 
 // Main Request Object
 // =================================
@@ -57,13 +44,13 @@ export default function (client: ReturnType<typeof baseClient>) {
       }),
     /**
      * @dev EN: Creates BKM payment
-     * @dev TR: 
+     * @dev TR:
      */
     bkm: {
       /**
-       * 
-       * @param payload 
-       * @returns 
+       *
+       * @param payload
+       * @returns
        */
       create: (payload: BkmCreateType) =>
         baseRequest(client, {
@@ -121,19 +108,20 @@ export default function (client: ReturnType<typeof baseClient>) {
           },
         }),
       /**
-       * 
-       * @param payload 
-       * @returns 
+       *
+       * @param payload
+       * @returns
        */
-      retrieve: (payload: BkmRetrieveType) => baseRequest(client, {
-        endpoint: "/payment/bkm/auth/detail",
-        method: "POST",
-        body: {
-          locale: payload?.["locale"],
-          conversationId: payload?.["conversationId"],
-          token: payload["token"],
-        },
-      }),
+      retrieve: (payload: BkmRetrieveType) =>
+        baseRequest(client, {
+          endpoint: "/payment/bkm/auth/detail",
+          method: "POST",
+          body: {
+            locale: payload?.["locale"],
+            conversationId: payload?.["conversationId"],
+            token: payload["token"],
+          },
+        }),
     },
     /**
      * @dev EN:
@@ -285,7 +273,7 @@ export default function (client: ReturnType<typeof baseClient>) {
         },
       }),
     threeDSecure: {
-      create: (payload: Payment3DSecureCreateType) => 
+      create: (payload: Payment3DSecureCreateType) =>
         baseRequest(client, {
           endpoint: "/payment/3dsecure/initialize",
           method: "POST",
@@ -309,8 +297,9 @@ export default function (client: ReturnType<typeof baseClient>) {
               cardToken: payload["paymentCard"]?.["cardToken"],
               cardUserKey: payload["paymentCard"]?.["cardUserKey"],
               consumerToken: payload["paymentCard"]?.["consumerToken"],
-              registerConsumerCard: payload["paymentCard"]?.["registerConsumerCard"],
-              ucsToken: payload["paymentCard"]?.["ucsToken"]
+              registerConsumerCard:
+                payload["paymentCard"]?.["registerConsumerCard"],
+              ucsToken: payload["paymentCard"]?.["ucsToken"],
             },
             buyer: {
               id: payload["buyer"]?.["id"],
@@ -358,9 +347,9 @@ export default function (client: ReturnType<typeof baseClient>) {
             posOrderId: payload?.["posOrderId"],
             connectorName: payload?.["connectorName"],
             callbackUrl: payload?.["callbackUrl"],
-          }
+          },
         }),
-      retrieve: (payload: Payment3DSecureRetrieveType) => 
+      retrieve: (payload: Payment3DSecureRetrieveType) =>
         baseRequest(client, {}),
     },
     iyzico: {

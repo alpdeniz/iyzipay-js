@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import { headerAttributes } from "@/utils/constants";
+import { headerAttributes } from "../utils/constants";
 import crypto from "crypto";
 
 // Helper Functions

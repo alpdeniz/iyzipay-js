@@ -1,8 +1,8 @@
 // Imports
 // =================================
-import { baseClient } from "@/client";
-import { apiTest, apm, payment, submerchant } from "@/requests";
-import * as constants from "@/utils/constants";
+import { baseClient } from "../client";
+import { apiTest, payment, submerchant } from "../requests";
+import * as constants from "../utils/constants";
 
 // Types
 // =================================
@@ -31,7 +31,6 @@ export type Extended = Prettify<
 
 export type IyzicoClient = ReturnType<typeof baseClient> & {
   apiTest: ReturnType<typeof apiTest>;
-  apm: ReturnType<typeof apm>;
   payment: ReturnType<typeof payment>;
   submerchant: ReturnType<typeof submerchant>;
 };

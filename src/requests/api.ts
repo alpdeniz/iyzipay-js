@@ -1,7 +1,7 @@
 // Imports
 // =================================
-import baseRequest from "@/utils/baseRequest";
-import { baseClient } from "@/client";
+import baseRequest from "../utils/baseRequest";
+import { baseClient } from "../client";
 
 /**
  * @dev EN:

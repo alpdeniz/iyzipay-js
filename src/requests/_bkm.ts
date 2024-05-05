@@ -1,9 +1,9 @@
 // Imports
 // =================================
-import type { BkmCreateBasicType, BkmCreateType, BkmRetrieveType } from "@/types/models";
-import baseRequest from "@/utils/baseRequest";
-import { formatPrice } from "@/utils/utils";
-import { baseClient } from "@/client";
+import type { BkmCreateBasicType, BkmCreateType, BkmRetrieveType } from "../types/models";
+import baseRequest from "../utils/baseRequest";
+import { formatPrice } from "../utils/utils";
+import { baseClient } from "../client";
 
 /**
  * @dev EN:

@@ -4,9 +4,9 @@ import type {
   CardStorageCreateType,
   CardStorageDeleteType,
   CardStorageRetrieveType,
-} from "@/types/models";
-import baseRequest from "@/utils/baseRequest";
-import { baseClient } from "@/client";
+} from "../types/models";
+import baseRequest from "../utils/baseRequest";
+import { baseClient } from "../client";
 
 /**
  * @dev EN:

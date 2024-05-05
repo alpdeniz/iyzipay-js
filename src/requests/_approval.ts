@@ -1,8 +1,8 @@
 // Imports
 // =================================
-import { baseClient } from "@/client";
-import type { ApprovalCreateRevokeType } from "@/types/models";
-import baseRequest from "@/utils/baseRequest";
+import { baseClient } from "../client";
+import type { ApprovalCreateRevokeType } from "../types/models";
+import baseRequest from "../utils/baseRequest";
 
 /**
  * @dev EN:

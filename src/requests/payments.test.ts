@@ -1,7 +1,7 @@
 // Imports
 // =================================
 import { expect, test } from "vitest";
-import iyzico from "..";;
+import iyzico from "..";
 import { config } from "dotenv";
 
 // Config

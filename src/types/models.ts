@@ -1,6 +1,6 @@
 // Imports
 // =================================
-import { currency, paymentChannel, installments, locale, paymentGroup, paymentSource, baseItemType, subMerchantType } from "@/utils/constants";
+import { currency, paymentChannel, installments, locale, paymentGroup, paymentSource, baseItemType, subMerchantType } from "../utils/constants";
 
 // Types
 // =================================

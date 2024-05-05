@@ -1,7 +1,7 @@
 // Imports
 // =================================
-import createClient from "@/client";
-import { IyzicoClient, IyzicoConfig } from "@/types/config";
+import createClient from "./client";
+import { IyzicoClient, IyzicoConfig } from "./types/config";
 
 // Main Script
 // =================================

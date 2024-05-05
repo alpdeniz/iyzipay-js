@@ -1,7 +1,7 @@
 // Imports
 // =================================
-import { DefaultRequest } from "@/types/requests";
-import { baseClient } from "@/client";
+import { DefaultRequest } from "../types/requests";
+import { baseClient } from "../client";
 import { generateHeaders } from "./utils";
 
 // Main Script
