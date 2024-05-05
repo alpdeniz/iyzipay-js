@@ -106,3 +106,51 @@ export const MOCK_APM_ACCOUNTS = {
     description: "Failed initialize"
   },
 };
+
+export const SUBMERCHANTS = {
+  PERSONAL: {
+    locale: "en",
+    conversationId: "123456789",
+    name: "John's market",
+    email: "email@submerchantemail.com",
+    gsmNumber: "+905350000000",
+    address: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+    iban: "TR180006200119000006672315",
+    contactName: "John",
+    contactSurname: "Doe",
+    currency: "TRY",
+    subMerchantExternalId: "<TO_BE_RELACED/GENERATED>",
+    identityNumber: "1234567890",
+    subMerchantType: "PERSONAL"
+  },
+  PRIVATE_COMPANY: {
+    locale: "tr",
+    conversationId: "123456789",
+    name: "John's market",
+    email: "email@submerchantemail.com",
+    gsmNumber: "+905350000000",
+    address: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+    iban: "TR180006200119000006672315",
+    taxOffice: "Tax office",
+    legalCompanyTitle: "John Doe inc",
+    currency: "TRY",
+    subMerchantExternalId: "<TO_BE_RELACED/GENERATED>",
+    identityNumber: "31300864726",
+    subMerchantType: "PRIVATE_COMPANY"
+  },
+  LIMITED_OR_JOINT_STOCK_COMPANY: {
+    locale: "tr",
+    conversationId: "123456789",
+    name: "John's market",
+    email: "email@submerchantemail.com",
+    gsmNumber: "+905350000000",
+    address: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+    iban: "TR180006200119000006672315",
+    taxOffice: "Tax office",
+    legalCompanyTitle: "XYZ inc",
+    currency: "TRY",
+    subMerchantExternalId: "<TO_BE_RELACED/GENERATED>",
+    taxNumber: "9261877",
+    subMerchantType: "LIMITED_OR_JOINT_STOCK_COMPANY"
+  }
+}

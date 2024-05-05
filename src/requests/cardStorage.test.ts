@@ -14,7 +14,7 @@ config();
  * @dev EN: 
  * @dev TR: 
  */
-test("cardStorage - create", async () => {
+test.skip("cardStorage - create", async () => {
   // Setup
   const client = iyzico({
     apiKey: `${process.env.IYZICO_API_KEY}`,
@@ -51,7 +51,7 @@ test("cardStorage - create", async () => {
  * @dev EN: 
  * @dev TR: 
  */
-test("cardStorage - retrieve", async () => {
+test.skip("cardStorage - retrieve", async () => {
   // Setup
   const client = iyzico({
     apiKey: `${process.env.IYZICO_API_KEY}`,

@@ -3,7 +3,7 @@
 import type {
   CardStorageCreateType,
   CardStorageDeleteType,
-  CardStorageRetrieveType,
+  CardStorageRetrieveListType,
 } from "../types/models";
 import baseRequest from "../utils/baseRequest";
 import { baseClient } from "../client";
@@ -47,7 +47,7 @@ export default function (client: ReturnType<typeof baseClient>) {
      * @param payload 
      * @returns 
      */
-    retrieve: (payload: CardStorageRetrieveType) => baseRequest(client, {
+    retrieveList: (payload: CardStorageRetrieveListType) => baseRequest(client, {
       endpoint: "/cardstorage/cards",
       method: "POST",
       body: {

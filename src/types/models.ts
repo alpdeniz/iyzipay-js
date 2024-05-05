@@ -1,12 +1,23 @@
 // Imports
 // =================================
-import { currency, paymentChannel, installments, locale, paymentGroup, paymentSource, baseItemType, subMerchantType } from "../utils/constants";
+import {
+  currency,
+  paymentChannel,
+  installments,
+  locale,
+  paymentGroup,
+  paymentSource,
+  baseItemType,
+  subMerchantType,
+  refundReason,
+  apmType,
+} from "../utils/constants";
 
 // Types
 // =================================
-// Universal
+// UNIVERSAL -----------------------
 export type BasicRequestType = {
-  connectorName?: string;
+  connectorName: string;
   conversationId?: string;
   locale?: (typeof locale)[keyof typeof locale];
 };
@@ -16,14 +27,29 @@ export type BasicBasketType = {
   basketItems: BasketItemType[];
 };
 
+export type BasicBasketMerchantRequiredType = {
+  basketId: string;
+  basketItems: {
+    id: string;
+    name: string;
+    category1?: string | undefined;
+    category2?: string | undefined;
+    itemType: (typeof baseItemType)[keyof typeof baseItemType];
+    price: number | string;
+    quantity?: number | undefined;
+    subMerchantKey: string | undefined;
+    subMerchantPrice: string | number | undefined;
+  }[];
+};
+
 export type BasicAddresesType = {
-  shippingAddress?: AddressType;
-  billingAddress?: AddressType;
+  shippingAddress: AddressType;
+  billingAddress: AddressType;
 };
 
 export type BasicPriceTypes = {
-  price?: string | number;
-  paidPrice?: string | number;
+  price: string | number;
+  paidPrice: string | number;
 };
 
 export type AddressType = {
@@ -50,24 +76,78 @@ export type BuyerType = {
   ip?: string;
 };
 
-// Get the type of the values from an Array
-
-
-// Specific
-export type PaymentCreateAltType = {
+// SPECIFIC -----------------------
+export type ApmCreateType = {
   locale?: (typeof locale)[keyof typeof locale];
   conversationId?: string;
   price: string | number;
   paidPrice: string | number;
-  installment?: typeof installments[number];
+  paymentChannel?: (typeof paymentChannel)[keyof typeof paymentChannel];
+  paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
+  paymentSource?: (typeof paymentSource)[keyof typeof paymentSource];
+  currency?: (typeof currency)[keyof typeof currency];
+  merchantOrderId?: string;
+  countryCode: string;
+  accountHolderName: string;
+  merchantCallbackUrl?: string;
+  merchantErrorUrl?: string;
+  merchantNotificationUrl?: string;
+  apmType: typeof apmType[keyof typeof apmType];
+  basketId?: string;
+  buyer: {
+    id: string;
+    name: string;
+    surname: string;
+    identityNumber: string;
+    email: string;
+    gsmNumber: string;
+    registrationDate?: string;
+    lastLoginDate?: string;
+    registrationAddress: string;
+    city: string;
+    country: string;
+    zipCode?: string;
+    ip?: string;
+  }
+  shippingAddress: {
+    address: string;
+    city: string;
+    country: string;
+    zipCode?: string;
+    contactName: string;
+  }
+  billingAddress: {
+    address: string;
+    city: string;
+    country: string;
+    zipCode?: string;
+    contactName: string;
+  }
+  basketItems: BasketItemType[];
+};
+
+export type ApmRetrieveType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  paymentId: string;
+};
+
+export type PaymentCreateType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  price: string | number;
+  paidPrice: string | number;
+  installment?: (typeof installments)[number];
   paymentChannel?: (typeof paymentChannel)[keyof typeof paymentChannel];
   basketId?: string;
   paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
   paymentCard: {
     cardHolderName: string;
-    cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number | ""}`;
-    expireMonth: `${number}${number}`; 
-    expireYear: `${number}${number}${number}${number}`; 
+    cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${
+      | number
+      | ""}`;
+    expireMonth: `${number}${number}`;
+    expireYear: `${number}${number}${number}${number}`;
     cvc: `${number}${number}${number}${number | ""}`;
     registerCard?: 0 | 1;
     cardAlias?: string;
@@ -76,8 +156,8 @@ export type PaymentCreateAltType = {
     consumerToken?: string;
     registerConsumerCard?: 0 | 1;
     ucsToken?: string;
-  },
-  buyer: BuyerType,
+  };
+  buyer: BuyerType;
   shippingAddress: AddressType;
   billingAddress: AddressType;
   basketItems: BasketItemType[];
@@ -87,39 +167,10 @@ export type PaymentCreateAltType = {
   posOrderId?: string;
   connectorName?: string;
   callbackUrl?: string;
-}
-
-/**
- * 
- */
-export type PaymentCreateType = {
-  // Required
-  price: string | number;
-  paidPrice: string | number;
-  billingAddress: AddressType;
-  buyer: BuyerType;
-  cardHolderName: string;
-  cvc: `${number}${number}${number}${number | ""}`
-  expireMonth: `${number}${number}`;
-  expireYear: `${number}${number}${number}${number}`;
-  cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number | ""}`;
-  installment: typeof installments[number];
-  currency: (typeof currency)[keyof typeof currency];
-  shippingAddress: AddressType;
-  // Optional
-  basketItems?: BasketItemType[];
-  paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
-  paymentChannel?: (typeof paymentChannel)[keyof typeof paymentChannel];
-  basketId?: string;
-  conversationId?: string;
-  locale?: (typeof locale)[keyof typeof locale];
-  cardAlias?: number;
-  registerCard?: 0 | 1;
-  paymentSource?: (typeof paymentSource)[keyof typeof paymentSource];
 };
 
 /**
- * 
+ *
  */
 export type PaymentRetrieveType = {
   locale?: (typeof locale)[keyof typeof locale];
@@ -135,7 +186,7 @@ export type PaymentRefundType = {
   price: string | number;
   currency?: (typeof currency)[keyof typeof currency];
   ip?: string;
-  reason?: "double_payment" | "fraud" | "other";
+  reason?: (typeof refundReason)[keyof typeof refundReason];
   description?: string;
 };
 
@@ -144,7 +195,7 @@ export type PaymentCancelType = {
   conversationId?: string;
   paymentId: string;
   ip?: string;
-}
+};
 
 //
 
@@ -234,14 +285,16 @@ export type CardStorageCreateType = {
   cardUserKey?: string;
   card: {
     cardAlias: string;
-    cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number | ""}`;
+    cardNumber: `${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${number}${
+      | number
+      | ""}`;
     expireYear: `${number}${number}${number}${number}`;
     expireMonth: `${number}${number}`;
     cardHolderName: string;
   };
 };
 
-export type CardStorageRetrieveType = {
+export type CardStorageRetrieveListType = {
   locale?: (typeof locale)[keyof typeof locale];
   conversationId?: string;
   cardUserKey: string;
@@ -259,11 +312,11 @@ export type Payment3DSecureCreateType = {
   conversationId?: string;
   price: string | number;
   paidPrice: string | number;
-  installment?: typeof installments[number];
+  installment?: (typeof installments)[number];
   paymentChannel?: (typeof paymentChannel)[keyof typeof paymentChannel];
   basketId?: string;
   paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
-  paymentCard: PaymentCardType,
+  paymentCard: PaymentCardType;
   buyer: BuyerType;
   shippingAddress: AddressType;
   billingAddress: AddressType;
@@ -274,50 +327,76 @@ export type Payment3DSecureCreateType = {
   gsmNumber?: string;
   posOrderId?: string;
   connectorName?: string;
-}
+};
 
 export type Payment3DSecureRetrieveType = {
   locale?: (typeof locale)[keyof typeof locale];
   conversationId?: string;
   paymentId: string;
   paymentConversationId?: string;
-}
+};
 
-// TBD
-
-export type ApmCreateType = Omit<BasicRequestType, "connectorName"> &
-  BasicBasketType & 
-  BasicAddresesType & {
-    accountHolderName?: string;
-    apmType?: string;
-    buyer?: BuyerType;
-    countryCode?: string;
-    currency?: (typeof currency)[keyof typeof currency];
-    merchantErrorUrl?: string;
-    merchantCallbackUrl?: string;
-    merchantNotificationUrl?: string;
-    merchantOrderId?: string;
-    paidPrice?: string | number;
-    paymentChannel?: string;
-    paymentGroup?: string;
-    paymentSource?: (typeof paymentSource)[keyof typeof paymentSource];
-    price?: string | number;
+export type BkmCreateBasicType = BasicRequestType &
+  Omit<BasicPriceTypes, "paidPrice"> & {
+    callbackUrl?: string;
+    paymentGroup?: (typeof paymentGroup)[keyof typeof paymentGroup];
+    buyerEmail: string;
+    buyerId: string;
+    buyerIp?: string;
+    posOrderId?: string;
+    installmentsDetails: {
+      bankId: string;
+      installmentPrices: {
+        installmentNumber: string;
+        totalPrice: string | number;
+      }[];
+    }[];
   };
 
-export type ApmRetrieveType = BasicRequestType & {
-  paymentId?: string;
+export type IyziposRetrieveInstallmentInfoType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  binNumber: string;
+  price: string | number;
+  currency?: (typeof currency)[keyof typeof currency];
 };
+
+export type IyziposCreateApprovalType = {
+  locale?: (typeof locale)[keyof typeof locale];
+  conversationId?: string;
+  paymentTransactionId: string;
+};
+
+// TBD =================================
+
+// export type ApmCreateType = Omit<BasicRequestType, "connectorName"> &
+//   BasicBasketType &
+//   BasicAddresesType & {
+//     accountHolderName?: string;
+//     apmType?: string;
+//     buyer?: BuyerType;
+//     countryCode?: string;
+//     currency?: (typeof currency)[keyof typeof currency];
+//     merchantErrorUrl?: string;
+//     merchantCallbackUrl?: string;
+//     merchantNotificationUrl?: string;
+//     merchantOrderId?: string;
+//     paidPrice?: string | number;
+//     paymentChannel?: string;
+//     paymentGroup?: string;
+//     paymentSource?: (typeof paymentSource)[keyof typeof paymentSource];
+//     price?: string | number;
+//   };
 
 export type ApprovalCreateRevokeType = BasicRequestType & {
   paymentTransactionId?: string;
 };
 
 // BasicPaymentType &
-export type BkmCreateType = 
-  BasicRequestType & 
-  BasicBasketType & 
+export type BkmCreateType = Omit<BasicRequestType, "connectorName"> &
+  BasicBasketMerchantRequiredType &
   BasicAddresesType & {
-    price?: string | number;
+    price: string | number;
     paymentSource?: string;
     enabledInstallments?: Array<1 | 2 | 3 | 6 | 9>;
     paymentGroup?: string;
@@ -325,21 +404,17 @@ export type BkmCreateType =
     callbackUrl?: string;
   };
 
-export type BkmCreateBasicType = Omit<BkmCreateType, "basic" | "paymentSource" | "enabledInstallments" | "paymentGroup" | "buyer"> & {
-  installmentDetails?: BkmInstallmentType[];
-  buyerEmail?: string;
-  buyerId?: string;
-  buyerIp?: string;
-  posOrderId?: string;
-};
+// export type BkmCreateBasicType = Omit<BkmCreateType, "basic" | "paymentSource" | "enabledInstallments" | "paymentGroup" | "buyer"> & {
+//   installmentDetails?: BkmInstallmentType[];
+//   buyerEmail?: string;
+//   buyerId?: string;
+//   buyerIp?: string;
+//   posOrderId?: string;
+// };
 
 export type BkmRetrieveType = Omit<BasicRequestType, "connectorName"> & {
   token: string;
-}
-
-
-
-
+};
 
 export type SubscriptionCustomerType = Omit<
   BuyerType,
@@ -350,14 +425,15 @@ export type SubscriptionCustomerType = Omit<
   | "country"
   | "zipCode"
   | "ip"
-> & BasicAddresesType;
+> &
+  BasicAddresesType;
 
 export type BasketItemType = {
   id: string;
   name: string;
   category1?: string;
   category2?: string;
-  itemType: typeof baseItemType[keyof typeof baseItemType];
+  itemType: (typeof baseItemType)[keyof typeof baseItemType];
   price: number | string;
   quantity?: number;
   subMerchantKey?: string;
@@ -420,7 +496,7 @@ export type PaginationType = BasicRequestType & {
 };
 
 export type PaymentType = BasicRequestType &
-  BasicBasketType & 
+  BasicBasketType &
   BasicAddresesType & {
     price?: string | number;
     paidPrice?: string | number;

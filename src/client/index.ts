@@ -1,7 +1,7 @@
 // Imports
 // =================================
-import { apiTest, cardStorage, payment, submerchant } from "../requests";
-import type { Extended, IyzicoConfig } from "../types/config";
+import { api, cardStorage, payments, submerchant } from "../requests";
+import type { Extended, IyzicoClient, IyzicoConfig } from "../types/config";
 import * as constants from "../utils/constants";
 
 // Client Setup
@@ -42,7 +42,7 @@ export const baseClient = (config: IyzicoConfig) => {
   }
 
   // Return extending
-  return Object.assign(client, { extend: extend(client) as any });
+  return client;
 }
 
 /**
@@ -50,17 +50,12 @@ export const baseClient = (config: IyzicoConfig) => {
  * @param config 
  * @returns 
  */
-export default function createClient (config: IyzicoConfig): ReturnType<typeof baseClient> & {
-  apiTest: ReturnType<typeof apiTest>;
-  payment: ReturnType<typeof payment>;
-  submerchant: ReturnType<typeof submerchant>;
-  cardStorage: ReturnType<typeof cardStorage>;
-} {
+export default function createClient (config: IyzicoConfig): IyzicoClient {
   const base = baseClient(config);
   return {
     ...base,
-    apiTest: apiTest(base),
-    payment: payment(base),
+    api: api(base),
+    payments: payments(base),
     submerchant: submerchant(base),
     cardStorage: cardStorage(base),
   };
