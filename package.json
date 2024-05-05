@@ -1,6 +1,6 @@
 {
   "name": "@codingwithmanny/iyzipay-js",
-  "version": "0.0.4-alpha",
+  "version": "0.0.5-alpha",
   "type": "module",
   "description": "A Typesafe Iyzico JS SDK",
   "main": "./_dist/_cjs/index.js",
