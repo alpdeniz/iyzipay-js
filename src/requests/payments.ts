@@ -21,7 +21,6 @@ import baseRequest from "../utils/baseRequest";
 import { formatPrice } from "../utils/utils";
 import { baseClient } from "../client";
 import { currency, locale } from "../utils/constants";
-import { payment } from "_dist/_types/requests";
 
 // Main Request Object
 // =================================

@@ -2,7 +2,7 @@ node_modules
 .env
 _cjs
 _esm
-_types
+types
 _dist
 coverage
 .DS_Store
