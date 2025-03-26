@@ -7,7 +7,8 @@
   "module": "./_dist/_esm/index.js",
   "types": "./_dist/types/index.js",
   "contributors": [
-    "codingwithmanny", "alpdeniz"
+    "codingwithmanny",
+    "alpdeniz"
   ],
   "author": {
     "name": "@codingwithmanny",
@@ -38,8 +39,8 @@
     "build:types": "rimraf _dist/types; ./node_modules/.bin/tsc --project ./tsconfig.build.json --module esnext --declarationDir ./_dist/types --emitDeclarationOnly --declaration --declarationMap",
     "clean": "rimraf _dist",
     "dev": "ts-node test/example.ts",
-    "test": "./node_modules/.bin/vitest run src/requests/payments.iyzipos.test.ts",
-    "test:coverage": "./node_modules/.bin/vitest run --coverage src",
+    "test": "vitest run src/requests/payments.iyzipos.test.ts",
+    "test:coverage": "vitest run --coverage src",
     "test:example": "ts-node test/example.ts"
   },
   "keywords": [
